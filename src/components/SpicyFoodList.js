@@ -7,12 +7,36 @@ function SpicyFoodList() {
   function handleAddFood() {
     const newFood = getNewRandomSpicyFood();
     console.log(newFood);
+    const newFoodArray = [...foods, newFood]
+    setFoods(newFoodArray)
+  }
+
+  function handleLiClick(id){
+    const newFoodArray = foods.filter((food) =>food.id !== id )
+    setFoods(newFoodArray)
+  }
+
+  function handleBtClick(id){
+    const newFoodArray = foods.map((food) => {
+    if (food.id === id) {
+      return {
+        ...food,
+        heatLevel: food.heatLevel + 1,
+      };
+    } else {
+      return food;
+    }
+  });
+  setFoods(newFoodArray);
   }
 
   const foodList = foods.map((food) => (
-    <li key={food.id}>
+  <React.Fragment key={food.id}>
+    <li onClick={() => handleLiClick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
+    <button onClick={() => handleBtClick(food.id)}>Increase Heat</button>
+  </React.Fragment>
   ));
 
   return (
@@ -24,3 +48,4 @@ function SpicyFoodList() {
 }
 
 export default SpicyFoodList;
+ 

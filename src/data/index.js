@@ -21,3 +21,4 @@ function getNewRandomSpicyFood() {
 }
 
 export { spicyFoods, getNewRandomSpicyFood };
+ 
